@@ -13,13 +13,12 @@ require 'optparse'
 class Arguments
     attr_accessor :rows, :cols, :connect, :ai, :load
 
-    def initialize(arguments)
+    def initialize()
         @rows = 7
         @cols = 7
         @connect = 4
         @ai = false
-        @load = nil
-        parse(arguments)
+        @load = ""
     end
 
     def parse(options)
@@ -62,23 +61,6 @@ class Arguments
             end
         end
 
-		begin
-			opt_parser.parse!(options)
-		rescue OptionParser::InvalidOption => e
-			puts "Invalid option, consider using '--help'."
-			puts "All following options ignored."
-		end
-    end
-
-    def to_s()
-		[
-			"Rows: #{@rows}",
-    		"Cols: #{@cols}",
-        	"Connects: #{@connect}",
-        	"Load file: #{@load}",
-        	"AI: #{@ai}\n",
-        	"Game Start!"
-		].join("\n")
-		# entire string is returned
+		opt_parser.parse!(options)
     end
 end

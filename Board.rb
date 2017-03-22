@@ -7,7 +7,11 @@
 # It also manages placing chips, checking if it's full and printing it out.
 ##
 
+require 'colorize'
+
 class Board
+
+	attr_accessor :board
 
 	def initialize(rows=7, cols=7)
 		@rows = rows
@@ -24,12 +28,13 @@ class Board
 			raise "Column is full."
 		else
 			@board.each_with_index do |r, ind|
-				if ind == (r.size-1) or @board[ind+1][col] != 0
+				if ind == (@rows-1) or @board[ind+1][col] != 0
 					@board[ind][col] = player
+					break
 				end
 			end
 		end
-	end
+	end # placeChip
 
 	def checkFull()
 		@board[0].each do |c|
@@ -41,19 +46,36 @@ class Board
 		return true
 	end
 
+	def each(&block)
+		@board.each(&block)
+	end
+
+	def each_with_index(&block)
+		@board.each_with_index(&block)
+	end
+
+	def [](row)
+		@board[row]
+	end
+
 	def to_s()
 		s = "\n"
 		for r in @board
 			for c in r
 				if c == 0
-					s << "-  "
-				else
-					s << "#{c}  "
+					s << "-  ".blue
+					next
+				end
+				case c
+				when 1
+					s << "#{c}  ".cyan
+				when 2
+					s << "#{c}  ".yellow
 				end
 			end
 			s << "\n"
 		end
 		s # s is returned
-	end
+	end # to_s
 
-end #Class
+end # Class

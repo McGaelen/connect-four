@@ -10,6 +10,13 @@
 /test/version_tmp/
 /tmp/
 c/
+bighuge
+diag
+diagback
+ello
+lol
+q
+test*
 
 # Used by dotenv library to load environment variables.
 # .env
