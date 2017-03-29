@@ -1,7 +1,7 @@
 ##
 # CIS 343 Connect 4 in Ruby - Game Board
 # Gaelen McIntee
-# ?/?/???
+# 3/29/2017
 #
 # This class holds a 2d array of Integers that represent the game board.
 # It also manages placing chips, checking if it's full and printing it out.
@@ -11,7 +11,7 @@ require 'colorize'
 
 class Board
 
-	attr_accessor :board
+	attr_accessor :board, :rows, :cols
 
 	def initialize(rows=7, cols=7)
 		@rows = rows
@@ -78,15 +78,13 @@ class Board
 		s = "\n"
 		for r in @board
 			for c in r
-				if c == 0
-					s << "-  ".blue
-					next
-				end
 				case c
-				when 1
-					s << "#{c}  ".cyan
-				when 2
-					s << "#{c}  ".yellow
+					when 0
+						s << "-  ".blue
+					when 1
+						s << "#{c}  ".cyan
+					when 2
+						s << "#{c}  ".yellow
 				end
 			end
 			s << "\n"

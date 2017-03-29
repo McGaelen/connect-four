@@ -1,7 +1,7 @@
 ##
 # CIS 343 Connect 4 in Ruby - Game Engine
 # Gaelen McIntee
-# ?/?/???
+# 3/29/2017
 #
 # This class contains all the game logic for Connect Four in Ruby.
 # It also manages an instance of the 'Board' class.
@@ -127,9 +127,14 @@ class Engine
 	# Static method that loads a game from the provided filename.
 	# Returns the loaded object.
 	# Since it's static, we can load a game from an uninitialized state.
+	# Will throw an exception if the loaded object is not an Engine.
     def self.load(filename)
         loadfile = File.open(filename)
-        Marshal.load(loadfile)  # this value is returned.
+        game = Marshal.load(loadfile)
+		if !game.is_a? Engine
+			raise "#{filename} is not a valid Connect Four file"
+		end
+		game # this value is returned, if execption not raised.
     end
 
 	# Dumps this object to a file.
