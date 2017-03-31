@@ -134,7 +134,7 @@ class Engine
 		if !game.is_a? Engine
 			raise "#{filename} is not a valid Connect Four file"
 		end
-		game # this value is returned, if execption not raised.
+		game # this value is returned if execption not raised.
     end
 
 	# Dumps this object to a file.

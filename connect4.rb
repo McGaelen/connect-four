@@ -70,7 +70,7 @@ exit if ARGV.include? "--help" # Leave if we're only printing help dialouge
 ARGV.clear # Clear ARGV to avoid reading stray input
 
 # Create a new gameboard with the command line args.
-# If any other arguments are given with "-l", the load file will override them.
+# If any other arguments are given alongside "-l", the load file will override them.
 game = Engine.new(args.rows, args.cols, args.connect, 1, args.ai)
 if args.load.end_with? ".c4"
     begin
