@@ -29,8 +29,8 @@ require_relative 'AI'
 # If there's a win or the board is full, report it,
 # and ask if the user wants to play again.
 def checkForWinner(game)
-	# If a win or a full board was detected
-	return unless game.checkWin == true or game.board.checkFull == true
+    # If a win or a full board was detected
+    return unless game.checkWin == true or game.board.checkFull == true
 
     # Display the result of the game in the $inputArea, and offer to restart
     $clearToEnd.($inputArea)
@@ -43,7 +43,7 @@ def checkForWinner(game)
     # Restart if the user typed 'y'. If they typed anything else, exit.
     input = gets.chomp
     if input == 'y' or input == 'Y'
-		$clearToEnd.($feedbackArea)
+    $clearToEnd.($feedbackArea)
         game.reset
         $display.($boardArea, game.board.to_s)
     else
@@ -78,8 +78,8 @@ if args.load.end_with? ".c4"
         feedback << "File \"#{args.load}\" loaded.\n".light_green
     rescue Errno::ENOENT => e
         feedback << e.message.light_red << ". Using default settings.\n".light_red
-	rescue Exception => e
-		feedback << e.message.light_red << ". Using default settings.\n".light_red
+    rescue Exception => e
+    feedback << e.message.light_red << ". Using default settings.\n".light_red
     end
 elsif !(args.load.empty?)
     feedback << "Please enter a valid Connect Four game file that ends with '.c4'.".light_red
@@ -138,9 +138,9 @@ checkForWinner(game)
 # 4) Check for a winner.
 #      - If there's a winner, offer to restart the game, or exit.
 loop do
-	# Take the AI's turn if we're playing against one.
-	# A chip will be placed in the column the AI provided.
-	# The feedbackArea will be updated accordingly.
+    # Take the AI's turn if we're playing against one.
+    # A chip will be placed in the column the AI provided.
+    # The feedbackArea will be updated accordingly.
     if game.ai == true and game.turn == 2
         $clearLine.($feedbackArea)
         $display.($feedbackArea, "AI's turn...".yellow)
@@ -151,13 +151,13 @@ loop do
         $clearLine.($feedbackArea)
         $display.($feedbackArea, "AI placed a chip in column #{move}".light_green)
         $display.($boardArea, game.board.to_s)
-		checkForWinner(game)
+    checkForWinner(game)
     end
 
     # 1) display the prompt and get user input.
     $display.($inputArea, "(connect4-p#{game.turn}) ") # prompt
     system "tput el"  # clears out previous input
-	input = gets.chomp
+    input = gets.chomp
     feedback.clear  # clears the feedback string itself
     $clearToEnd.($feedbackArea)  # clears the area displaying the feedback string
 
@@ -180,9 +180,9 @@ loop do
             "\n"
         ].join("\n").yellow
 
-	# ✅ User wants to load the game board from a file
-	elsif input == 'l' or input == 'L' or input == 'load'
-		# Get the filename from the user
+    # ✅ User wants to load the game board from a file
+    elsif input == 'l' or input == 'L' or input == 'load'
+    # Get the filename from the user
         $clearLine.($inputArea)
         $display.($inputArea, " Filename? ")
         filename = gets.chomp
@@ -208,14 +208,14 @@ loop do
     		# If loading fails, print the error message in the feedback string.
             rescue Errno::ENOENT => e
                 feedback << e.message.light_red << ". File not loaded.".light_red
-			rescue Exception => e
-				feedback << e.message.light_red << ". File not loaded.".light_red
+    rescue Exception => e
+    feedback << e.message.light_red << ". File not loaded.".light_red
             end
         end
 
-	# ✅ User wants to save the game board to a file
-	elsif input == 's' or input == 'S' or input == 'save'
-		# Get the filename, and save the current game to a file.  Print a success message.
+    # ✅ User wants to save the game board to a file
+    elsif input == 's' or input == 'S' or input == 'save'
+    # Get the filename, and save the current game to a file.  Print a success message.
         $clearLine.($inputArea)
         $display.($inputArea, " Filename? ")
         filename = gets.chomp
@@ -224,14 +224,14 @@ loop do
         feedback << "File \"#{filename}\" saved.".light_green
 
     # ✅ User wants to place a chip
-	elsif input =~ /\d+/ # input is a number and not any other command
-		# try to place a chip in the given column
+    elsif input =~ /\d+/ # input is a number and not any other command
+    # try to place a chip in the given column
         begin
         	game.placeChip(input.to_i)  # This can throw an exception
             $display.($boardArea, game.board.to_s)
             feedback << "Player #{game.turn} put a chip in column #{input}.".light_green
             game.advance_turn
-		# if placeChip fails, print the reason in the feedback.
+    # if placeChip fails, print the reason in the feedback.
         rescue Exception => e
             feedback << e.message.light_red
         end
@@ -246,6 +246,6 @@ loop do
 
     # 4) Check for a win.
     # ✅
-	checkForWinner(game)
+    checkForWinner(game)
 
 end # End of program.

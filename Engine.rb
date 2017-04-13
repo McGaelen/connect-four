@@ -14,7 +14,7 @@ class Engine
 
     attr_accessor :rows, :cols, :board, :turn, :connect, :ai, :winner, :winCase
 
-	# Initialize everything to default values and make a new Board instance
+    # Initialize everything to default values and make a new Board instance
     def initialize(rows, cols, connect, turn, ai)
         @rows = rows
         @cols = cols
@@ -26,15 +26,15 @@ class Engine
         @winCase = ""
     end
 
-	# Check the board for a win.  The algorithm checks for 4 cases:
-	# => Horizontal case
-	# => Vertical case
-	# => Diagonal (Up and to the Right) case
-	# => Diagonal (Up and to the Left) case
-	# True is returned if there is a winner, false if no winner is detected.
-	# If a winner is detected, the winner and the case that was triggered are recorded.
+    # Check the board for a win.  The algorithm checks for 4 cases:
+    # => Horizontal case
+    # => Vertical case
+    # => Diagonal (Up and to the Right) case
+    # => Diagonal (Up and to the Left) case
+    # True is returned if there is a winner, false if no winner is detected.
+    # If a winner is detected, the winner and the case that was triggered are recorded.
     def checkWin()
-		# Looping through each spot one by one
+    # Looping through each spot one by one
         @board.each_with_index do |rowArr, ri|   # rowArr is an Array
             rowArr.each_with_index do |chip, ci| # chip is an Integer
 
@@ -101,14 +101,14 @@ class Engine
         false  # return val
     end  # checkWin
 
-	# Provides access to Board's placeChip method.
-	# No turn needs to be provided, since the Engine already knows
-	# who's turn it is.
+    # Provides access to Board's placeChip method.
+    # No turn needs to be provided, since the Engine already knows
+    # who's turn it is.
     def placeChip(col)
         board.placeChip(col, turn)
     end
 
-	# Move the turn to the next person.
+    # Move the turn to the next person.
     def advance_turn()
         @turn += 1
         if @turn > 2
@@ -116,41 +116,41 @@ class Engine
         end
     end
 
-	# Reset the game by recreating the board and resetting the turn, winner, and winCase
+    # Reset the game by recreating the board and resetting the turn, winner, and winCase
     def reset()
         @board = Board.new(rows, cols)
         @turn = 1
         @winner = 0
-		@winCase = ""
+    @winCase = ""
     end
 
-	# Static method that loads a game from the provided filename.
-	# Returns the loaded object.
-	# Since it's static, we can load a game from an uninitialized state.
-	# Will throw an exception if the loaded object is not an Engine.
+    # Static method that loads a game from the provided filename.
+    # Returns the loaded object.
+    # Since it's static, we can load a game from an uninitialized state.
+    # Will throw an exception if the loaded object is not an Engine.
     def self.load(filename)
         loadfile = File.open(filename)
         game = Marshal.load(loadfile)
-		if !game.is_a? Engine
-			raise "#{filename} is not a valid Connect Four file"
-		end
-		game # this value is returned if execption not raised.
+    if !game.is_a? Engine
+    raise "#{filename} is not a valid Connect Four file"
+    end
+    game # this value is returned if execption not raised.
     end
 
-	# Dumps this object to a file.
+    # Dumps this object to a file.
     def save(filename)
         savefile = File.open(filename, "w")
         Marshal.dump(self, savefile)
     end
 
-	# Returns a string with all the parameters associated with this Engine.
+    # Returns a string with all the parameters associated with this Engine.
     def to_s()
         [
-			"Rows: #{@rows}",
+    "Rows: #{@rows}",
     		"Cols: #{@cols}",
         	"Connects: #{@connect}",
         	"AI: #{@ai}\n",
-		].join("\n")
-		# entire string is returned
+    ].join("\n")
+    # entire string is returned
     end
 end
