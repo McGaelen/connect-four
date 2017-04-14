@@ -1,9 +1,9 @@
 # CIS 343 Project 4 - Connect Four in Ruby
 This is the classic game Connect Four, originally in C, rewritten in Ruby.  It's a game where 2 players drop tiles into a grid, and each player tries to connect four of their tiles in a row to win. This program is a text-based version of Connect Four run in the command line.  The user types in the number of the column they want to drop a tile into, and the grid/board is re-printed everytime a change is made. 
 
-This version is object-oriented, and is much cleaner and less error prone than the C version.  The Ruby version also uses several different libraries and gems:
-* optparse: Ruby's implementation of argument parsing.
-* Marshal: Ruby's implementation of pickling objects, for loading and saving the game.
+This was my first time writing a Ruby program. This version is object-oriented, and is much cleaner and less error prone than the C version.  The board takes up the entire screen, and stays within that screen space (no more scrolling display). The Ruby version also uses several different libraries and gems:
+* optparse: Ruby's implementation of argument parsing. (assignment requirement)
+* Marshal: Ruby's implementation of pickling objects, for loading and saving the game. (assignment requirement)
 * colorize: a gem that makes it easy to change the color of a string that's displayed in the terminal.
 
 ### Features
@@ -32,5 +32,8 @@ It can take the following command line arguments:
  **(q)uit** | Quits the game.
  
  \*Parenthesis around a letter indicate the short version of the command.
-
-There is also a basic AI that was implemented to play against.  It's not a very robust AI, but it does more than just pick a random column.
+ 
+ ### Notes
+* There is a basic AI that was implemented to play against.  It's not a very robust AI, but it does more than just pick a random column.
+* For the game to display correctly, terminal should be at least 67 cols wide and be big enough to display the board (it will warn you otherwise)
+* Some feedback statements print emoji, so some weird chars may print out if the terminal doesn't support displaying them
