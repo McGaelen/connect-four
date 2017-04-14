@@ -26,8 +26,8 @@ require_relative 'Engine'
 require_relative 'Arguments'
 require_relative 'AI'
 
-# If there's a win or the board is full, report it,
-# and ask if the user wants to play again.
+# Function that manages calling the game's checkWin and checkFull methods,
+# reports their results, and manages restarting the game if the user wants.
 def checkForWinner(game)
     # If a win or a full board was detected
     return unless game.checkWin == true or game.board.checkFull == true

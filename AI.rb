@@ -21,7 +21,7 @@ class AI
 
     # Return a random column to place a chip in.
     def self.getRandomMove(board)
-    return if board.checkFull == true
+        return if board.checkFull == true
         col = rand(board.cols)
         while board.checkFull == true
             col = rand(board.cols)
@@ -31,7 +31,7 @@ class AI
 
     # Calculate a move, or pick a random one if no move is found.
     def self.getMove(opp, board)
-    return if board.checkFull == true
+        return if board.checkFull == true
 
         board.each_with_index do |rowArr, ri|
             rowArr.each_with_index do |chip, ci|
@@ -51,75 +51,75 @@ class AI
                         if board[ri+3][ci-3] == 0
                             if ri+4 >= board.rows
                                 return ci-3 if checkColFull(board, ci-3) == false
-    elsif board[ri+4][ci-3] != 0
-    return ci-3 if checkColFull(board, ci-3) == false
-    end
-    end
-    end
-    end
+                            elsif board[ri+4][ci-3] != 0
+                                return ci-3 if checkColFull(board, ci-3) == false
+                            end
+                        end
+                    end
+                end
 
-    # Up
-    if ri-3 >= 0 and board[ri-3][ci] == 0 and board[ri-2][ci] == opp and board[ri-1][ci] == opp
-    return ci if checkColFull(board, ci) == false
-    end
+                # Up
+                if ri-3 >= 0 and board[ri-3][ci] == 0 and board[ri-2][ci] == opp and board[ri-1][ci] == opp
+                    return ci if checkColFull(board, ci) == false
+                end
 
-    # Left
-    if ci-3 >= 0 and board[ri][ci-3] == 0 and board[ri][ci-2] == opp and board[ri][ci-1] == opp
-    if ri+1 >= 6
-    return ci-3 if checkColFull(board, ci-3) == false
-    elsif board[ri+1][ci-3] != 0
-    return ci-3 if checkColFull(board, ci-3) == false
-    end
-    end
+                # Left
+                if ci-3 >= 0 and board[ri][ci-3] == 0 and board[ri][ci-2] == opp and board[ri][ci-1] == opp
+                    if ri+1 >= 6
+                        return ci-3 if checkColFull(board, ci-3) == false
+                    elsif board[ri+1][ci-3] != 0
+                        return ci-3 if checkColFull(board, ci-3) == false
+                    end
+                end
 
-    # Left Mid
-    if ci-3 >= 0 and board[ri][ci-3] == opp
-    if board[ri][ci-2] == opp
-    if ri+1 >= board.rows
-    return ci-1 if checkColFull(board, ci-1) == false
-    elsif board[ri+1][ci-1] != 0
-    return ci-1 if checkColFull(board, ci-1) == false
-    end
-    elsif board[ri][ci-1] == opp
-    if ri+1 >= board.rows
-    return ci-2 if checkColFull(board, ci-2) == false
-    elsif board[ri+1][ci-2] != 0
-    return ci-2 if checkColFull(board, ci-2) == false
-    end
-    end
-    end
+                # Left Mid
+                if ci-3 >= 0 and board[ri][ci-3] == opp
+                    if board[ri][ci-2] == opp
+                        if ri+1 >= board.rows
+                            return ci-1 if checkColFull(board, ci-1) == false
+                        elsif board[ri+1][ci-1] != 0
+                            return ci-1 if checkColFull(board, ci-1) == false
+                        end
+                    elsif board[ri][ci-1] == opp
+                        if ri+1 >= board.rows
+                            return ci-2 if checkColFull(board, ci-2) == false
+                        elsif board[ri+1][ci-2] != 0
+                            return ci-2 if checkColFull(board, ci-2) == false
+                        end
+                    end
+                end
 
-    # Back and Up and Mid
-    if ci-3 >= 0 and ri-3 >= 0
-    if board[ri-3][ci-3] == opp
-    if board[ri-2][ci-2] == opp
-    if board[ri-1][ci-1] == 0 and board[ri][ci-1] != 0
-    return ci-1 if checkColFull(board, ci-1) == false
-    end
-    end
-    if board[ri-1][ci-1] == opp
-    if board[ri-2][ci-2] == 0 and board[ri-1][ci-2] != 0
-    return ci-2 if checkColFull(board, ci-2) == false
-    end
-    end
-    end
-    end
+                # Back and Up and Mid
+                if ci-3 >= 0 and ri-3 >= 0
+                    if board[ri-3][ci-3] == opp
+                        if board[ri-2][ci-2] == opp
+                            if board[ri-1][ci-1] == 0 and board[ri][ci-1] != 0
+                                return ci-1 if checkColFull(board, ci-1) == false
+                            end
+                        end
+                        if board[ri-1][ci-1] == opp
+                            if board[ri-2][ci-2] == 0 and board[ri-1][ci-2] != 0
+                                return ci-2 if checkColFull(board, ci-2) == false
+                            end
+                        end
+                    end
+                end
 
-    # Forward and Up and Mid
-    if ci+3 < board.cols and ri-3 >= 0
-    if board[ri-3][ci+3] == opp
-    if board[ri-2][ci+2] == opp
-    if board[ri-1][ci+1] == 0 and board[ri][ci+1] != 0
-    return ci+1 if checkColFull(board, ci+1) == false
-    end
-    end
-    if board[ri-1][ci+1] == opp
-    if board[ri-2][ci+2] == 0 and board[ri-1][ci+2] != 0
-    return ci+2 if checkColFull(board, ci+2) == false
-    end
-    end
-    end
-    end
+                # Forward and Up and Mid
+                if ci+3 < board.cols and ri-3 >= 0
+                    if board[ri-3][ci+3] == opp
+                        if board[ri-2][ci+2] == opp
+                            if board[ri-1][ci+1] == 0 and board[ri][ci+1] != 0
+                                return ci+1 if checkColFull(board, ci+1) == false
+                            end
+                        end
+                        if board[ri-1][ci+1] == opp
+                            if board[ri-2][ci+2] == 0 and board[ri-1][ci+2] != 0
+                                return ci+2 if checkColFull(board, ci+2) == false
+                            end
+                        end
+                    end
+                end
 
             end
         end  # The two loops looping through the board.

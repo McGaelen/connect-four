@@ -34,7 +34,7 @@ class Engine
     # True is returned if there is a winner, false if no winner is detected.
     # If a winner is detected, the winner and the case that was triggered are recorded.
     def checkWin()
-    # Looping through each spot one by one
+        # Looping through each spot one by one
         @board.each_with_index do |rowArr, ri|   # rowArr is an Array
             rowArr.each_with_index do |chip, ci| # chip is an Integer
 
@@ -121,7 +121,7 @@ class Engine
         @board = Board.new(rows, cols)
         @turn = 1
         @winner = 0
-    @winCase = ""
+        @winCase = ""
     end
 
     # Static method that loads a game from the provided filename.
@@ -131,10 +131,10 @@ class Engine
     def self.load(filename)
         loadfile = File.open(filename)
         game = Marshal.load(loadfile)
-    if !game.is_a? Engine
-    raise "#{filename} is not a valid Connect Four file"
-    end
-    game # this value is returned if execption not raised.
+        if !game.is_a? Engine
+            raise "#{filename} is not a valid Connect Four file"
+        end
+        game # this value is returned if execption not raised.
     end
 
     # Dumps this object to a file.
@@ -146,11 +146,11 @@ class Engine
     # Returns a string with all the parameters associated with this Engine.
     def to_s()
         [
-    "Rows: #{@rows}",
-    		"Cols: #{@cols}",
-        	"Connects: #{@connect}",
-        	"AI: #{@ai}\n",
-    ].join("\n")
-    # entire string is returned
+            "Rows: #{@rows}",
+            "Cols: #{@cols}",
+            "Connects: #{@connect}",
+            "AI: #{@ai}\n",
+        ].join("\n")
+        # entire string is returned
     end
 end
