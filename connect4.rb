@@ -43,7 +43,7 @@ def checkForWinner(game)
     # Restart if the user typed 'y'. If they typed anything else, exit.
     input = gets.chomp
     if input == 'y' or input == 'Y'
-    $clearToEnd.($feedbackArea)
+        $clearToEnd.($feedbackArea)
         game.reset
         $display.($boardArea, game.board.to_s)
     else
@@ -79,7 +79,7 @@ if args.load.end_with? ".c4"
     rescue Errno::ENOENT => e
         feedback << e.message.light_red << ". Using default settings.\n".light_red
     rescue Exception => e
-    feedback << e.message.light_red << ". Using default settings.\n".light_red
+        feedback << e.message.light_red << ". Using default settings.\n".light_red
     end
 elsif !(args.load.empty?)
     feedback << "Please enter a valid Connect Four game file that ends with '.c4'.".light_red
@@ -151,7 +151,7 @@ loop do
         $clearLine.($feedbackArea)
         $display.($feedbackArea, "AI placed a chip in column #{move}".light_green)
         $display.($boardArea, game.board.to_s)
-    checkForWinner(game)
+        checkForWinner(game)
     end
 
     # 1) display the prompt and get user input.
@@ -182,7 +182,7 @@ loop do
 
     # ✅ User wants to load the game board from a file
     elsif input == 'l' or input == 'L' or input == 'load'
-    # Get the filename from the user
+        # Get the filename from the user
         $clearLine.($inputArea)
         $display.($inputArea, " Filename? ")
         filename = gets.chomp
@@ -190,8 +190,8 @@ loop do
         if !filename.end_with? ".c4"
             feedback << "Please enter a valid Connect Four game file that ends with '.c4'.".light_red
         else
-    		# Try to load the file, set the new display areas based on the incoming game,
-    		# and display all of it.
+            # Try to load the file, set the new display areas based on the incoming game,
+            # and display all of it.
             begin
                 game = Engine.load(filename)
                 $clearToEnd.(0)  # clear starting from position 0 (clears entire window)
@@ -205,17 +205,17 @@ loop do
                 puts "\nGame Start!".light_green
                 $display.($boardArea, game.board.to_s)
                 $display.($feedbackArea, feedback)
-    		# If loading fails, print the error message in the feedback string.
+                # If loading fails, print the error message in the feedback string.
             rescue Errno::ENOENT => e
                 feedback << e.message.light_red << ". File not loaded.".light_red
-    rescue Exception => e
-    feedback << e.message.light_red << ". File not loaded.".light_red
+            rescue Exception => e
+                feedback << e.message.light_red << ". File not loaded.".light_red
             end
         end
 
     # ✅ User wants to save the game board to a file
     elsif input == 's' or input == 'S' or input == 'save'
-    # Get the filename, and save the current game to a file.  Print a success message.
+        # Get the filename, and save the current game to a file.  Print a success message.
         $clearLine.($inputArea)
         $display.($inputArea, " Filename? ")
         filename = gets.chomp
@@ -225,13 +225,13 @@ loop do
 
     # ✅ User wants to place a chip
     elsif input =~ /\d+/ # input is a number and not any other command
-    # try to place a chip in the given column
+        # try to place a chip in the given column
         begin
-        	game.placeChip(input.to_i)  # This can throw an exception
+            game.placeChip(input.to_i)  # This can throw an exception
             $display.($boardArea, game.board.to_s)
             feedback << "Player #{game.turn} put a chip in column #{input}.".light_green
             game.advance_turn
-    # if placeChip fails, print the reason in the feedback.
+        # if placeChip fails, print the reason in the feedback.
         rescue Exception => e
             feedback << e.message.light_red
         end
